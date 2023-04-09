@@ -3,13 +3,16 @@ import React, { useState, useEffect } from 'react';
 function Top() {
     const [cryptoArr, setCryptoArr] = useState([]);
 
-    useEffect(async () => {
-        let respons = await fetch("https://api.coinlore.net/api/tickers/");
-        const data = await respons.json();
-        console.log(data);
-        let neData = data.data.splice(0, 10);
-        //console.log(neData);
-        setCryptoArr([...neData]);
+    useEffect(() => {
+        const fetchFun = async () => {
+            let respons = await fetch("https://api.coinlore.net/api/tickers/");
+            const data = await respons.json();
+            console.log(data);
+            let neData = data.data.splice(0, 10);
+            //console.log(neData);
+            setCryptoArr([...neData]);
+        };
+        fetchFun();
     }, [])
 
     return (
